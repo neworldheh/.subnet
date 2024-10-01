@@ -95,4 +95,4 @@ console.log(`Maska: /${mask} = ${mask1}.${mask2}.${mask3}.${mask4}`)
 console.log(`Adres sieci: ${ipsieci1}.${ipsieci2}.${ipsieci3}.${ipsieci4}`)
 console.log(`Adres broadcast: ${ipbroadcast}`)
 //Funckja do: Bin -> Dec uniwersalnie
-//Funckja do: Dec-> Bin uniwersalnie
+//Funckja do: Dec-> Bin uniwersalnie hii

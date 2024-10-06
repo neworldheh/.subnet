@@ -1,0 +1,439 @@
+@font-face{font-family:"'tthovesproregular', sans-serif";font-display:swap;src:url(https://typetype.org/wp-content/uploads/TT_Hoves_Pro_Regular.woff2?v=1727797729) format("woff2"),url(https://typetype.org/wp-content/uploads/TT_Hoves_Pro_Regular.woff?v=1727797729) format("woff"),url(https://typetype.org/wp-content/uploads/TT-Hoves-Pro-Regular.ttf?v=1727797729) format("truetype"),url(https://typetype.org/wp-content/uploads/TT-Hoves-Pro-Regular.otf?v=1727797729) format("opentype"),url(https://typetype.org/wp-content/uploads/TT_Hoves_Pro_Regular.eot?#iefix) format("embedded-opentype");}.tthovesproregular_text{font-family:"'tthovesproregular', sans-serif";}
+*{
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.background{
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f7f7f7;
+}
+.figure{
+    width: 10vw;
+    height: 30vh;
+}
+/* .line{
+    animation: line 3s;
+    top: 15vh;
+    left: 0vw;
+    position: fixed;
+    width: 100vw;
+    height: 1vh;
+    background-color: #0b0b0b;
+}
+.line1{
+    animation: line1 3s;
+    top: 25vh;
+    position: fixed;
+    width: 100vw;
+    height: .5vh;
+    background-color: #77fedc;
+}
+.line2{
+    animation: line2 3s;
+    top: 10vh;
+    position: fixed;
+    width: 100vw;
+    height: 1vh;
+    background-color: #dbdbdb;
+}
+@keyframes line {
+    0%{
+        top: 15vh;
+    }
+    50%{
+        top: 70vh;
+        transform: rotate(40deg);
+    }
+    100%{
+        top: 100vh;
+        left: 100vw;
+        transform: rotate(50deg);
+    }
+} */
+.c1{
+    position: fixed;
+    top: 15vh;
+    left: 5vh;
+    width: 20vh;
+    height: 5vh;
+    background-color: #070707;
+}
+.c2{
+    position: fixed;
+    top: 15vh;
+    left: 5vh;
+    width: 5vh;
+    height: 20vh;
+    background-color: #070707;
+}
+.c3{
+    position: fixed;
+    top: 35vh;
+    left: 5vh;
+    width: 20vh;
+    height: 5vh;
+    background-color: #070707;
+}
+.a1{
+    position: fixed;
+    top: 24vh;
+    left: 30vh;
+    width: 25vh;
+    height: 5vh;
+    transform: rotate(-60deg);
+    background-color: #070707;
+}
+.a2{
+    position: fixed;
+    top: 24vh;
+    left: 40vh;
+    width: 25vh;
+    height: 5vh;
+    transform: rotate(60deg);
+    background-color: #070707;
+}
+.a3{
+    position: fixed;
+    top: 27vh;
+    left: 37vh;
+    width: 20vh;
+    height: 5vh;
+    background-color: #070707;
+}
+.l1{
+    position: fixed;
+    top: 15vh;
+    left:70vh;
+    width: 5vh;
+    height: 20vh;
+    background-color: #070707;
+}
+.l2{
+    position: fixed;
+    top: 35vh;
+    left: 70vh;
+    width: 20vh;
+    height: 5vh;
+    background-color: #070707;
+}
+.cc1{
+    position: fixed;
+    top: 15vh;
+    left: 100vh;
+    width: 20vh;
+    height: 5vh;
+    background-color: #070707;
+}
+.cc2{
+    position: fixed;
+    top: 15vh;
+    left: 100vh;
+    width: 5vh;
+    height: 20vh;
+    background-color: #070707;
+}
+.cc3{
+    position: fixed;
+    top: 35vh;
+    left: 100vh;
+    width: 20vh;
+    height: 5vh;
+    background-color: #070707;
+}
+.i{
+    position: fixed;
+    top: 45vh;
+    left: 110vh;
+    width: 5vh;
+    height: 20vh;
+    background-color: #070707;
+}
+.p1{
+    position: fixed;
+    top: 45vh;
+    left: 120vh;
+    width: 5vh;
+    height: 20vh;
+    background-color: #070707;
+}
+.p2{
+    position: fixed;
+    top: 40vh;
+    left: 125vh;
+    width: 4vh;
+    height: 20vh;
+    background-color: #070707;
+    transform: rotate(-60deg);
+}
+.p3{
+    position: fixed;
+    top: 45vh;
+    left: 125vh;
+    width: 4vh;
+    height: 20vh;
+    background-color: #070707;
+    transform: rotate(60deg);
+}
+.toggle{
+    position: relative;
+    top: 40vh;
+    left: 30vh;
+    width: 170px;
+    height: 40px;
+    background-color: #efefefe6;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border: 1px black solid;
+    transform: rotate(0deg);
+}
+.toggle:hover .circle{
+    transform: rotate(-90deg);
+    transition: .5s;
+}
+.circle{
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+.top{
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+.title{
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+.star{
+    font-size: 30px;
+    transform: translateY(7px);
+}
+.creators{
+    z-index: -1;
+    position: fixed;
+    height: 50px;
+    width: 100px;
+    right: 0vw;
+    font-size: 15px;
+    font-weight: 300;
+    transition: .5s;
+    background-color: #000;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+.creators::before{
+    border-radius: 50px;
+    z-index: -1;
+    position: absolute;
+    content: "";
+    width: 0px;
+    height: 50px;
+    transform: translateX(0);
+    transition: .5s;
+    background-color: #000;
+}
+.creators:hover{
+    right: 6vw;
+    transition: .5s;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    overflow: visible;
+}
+.creators:hover::before{
+    transform: translateX(100px);
+    transition: 1s;
+    z-index: -1;
+    border-radius: 0;
+    width: 100px;
+}
+.creators:hover .cnames{
+    z-index: 1;
+    right: 1vw;
+    transition: .5s;
+    color: white;
+}
+.cnames{
+    position: fixed;
+    right: -5vw;
+    font-size: 10px;
+    font-weight: 300;
+    transition: .5s;
+    color: black;
+}
+.est{
+    z-index: 2;
+    animation: lr 3s infinite;
+    position: fixed;
+    left: 3vw;
+    bottom: 6vh;
+    font-size: 20px;
+}
+@keyframes lr {
+    0%{
+        transform: translateX(-1vw);
+    }
+    50%{
+        transform: translateX(0vw);
+    }
+    100%{
+        transform: translateX(-1vw);
+    }
+}
+.content{
+    z-index: 1;
+    position: relative;
+    top: -1vh;
+    width: 100vw;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+.control-panel {
+    animation: gradientShift 4s ease-in-out infinite;
+    position: relative;
+    top: 10vh;
+    height: 50vh;
+    width: 25vw;
+    padding: 20px;
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(123deg, rgba(241,134,68,0.8) 18%, rgba(231,116,200,0.8) 44%, rgba(148,99,226,0.8) 60%, rgba(106,55,220,0.8) 72%);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    filter: blur(.5px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(12, 12, 12, 0.3);
+    border-radius: 15px;
+    transition: 1s;
+    background-size: 300% 300%;
+    transform: rotate(5deg);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.ip{
+    width: 100%;
+    height: 10%;
+}
+.mask{
+    width: 100%;
+    height: 10%;
+}
+.names{
+    float: left;
+    width: 20%;
+}
+input{
+    float: left;
+    width: 65%;
+}
+select{
+    float: left;
+    width: 65%;
+}
+.subnets{
+    width: 100%;
+    height: 80%;
+}
+.subnet{
+    text-align: center;
+    width: 100%;
+    height: 20%;
+    overflow: hidden;
+}
+.previous-subnet{
+    width: 33%;
+    height: 100%;
+    float: left;
+    filter: blur(1px);
+    cursor: pointer;
+}
+.actual-subnet{
+    width: 33%;
+    height: 100%;
+    float: left;
+}
+/*na now zakoduj przyciski podsieci po kliknieciu prswa lub lewa sie po prostu dodaje sie blura i redujkuje left*/
+.next-subnet{
+    width: 33%;
+    height: 100%;
+    float: left;
+    filter: blur(1px);
+    cursor: pointer;
+}
+.hosts{
+    width: 100%;
+    height: 50%;
+}
+.namesubnets{
+    float: left;
+}
+#numhosts{
+    width: 5%;
+    float: left;
+}
+.calculate{
+    float: right;
+    border-radius: 50px;
+    width: 100px;
+    height: 40px;
+    background-color: #000000;
+    color: aliceblue;
+    border-color: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    transition: .5s;
+    border: 1px solid #000;
+}
+.calculate:hover{
+    background-color: transparent;
+    color: #000;
+}

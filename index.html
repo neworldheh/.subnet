@@ -4,8 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="background">
+        <div class="calc-text">
+            <div class="c">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+            </div>
+            <div class="a">
+                <div class="a1"></div>
+                <div class="a2"></div>
+                <div class="a3"></div>
+            </div>
+            <div class="l">
+                <div class="l1"></div>
+                <div class="l2"></div>
+            </div>
+            <div class="cc">
+                <div class="cc1"></div>
+                <div class="cc2"></div>
+                <div class="cc3"></div>
+            </div>
+            <div class="i">
+            </div>
+            <div class="p">
+                <div class="p1"></div>
+                <div class="p2"></div>
+                <div class="p3"></div>
+            </div>
+        </div>
+        <div class="toggle">
+            <div class="circle">-></div>
+        </div>
+    </div>
+    <div class="top"><div class="title">subnety</div><div class="star">*</div><div class="creators">creators:<a class="cnames">maciek, stas</a></div></div>
+    <div class="est">Est. 2024 ••</div>
+    <div class="content">
+
+        <div class="control-panel">
+            <div class="ip">
+                <div class="names">ip: </div><input type="text" id="ip">
+            </div>
+            <div class="mask">
+                <div class="names">mask: </div><select name="m">
+                    <option value="0">/0 aka 0.0.0.0</option><option value="1">/1 aka 128.0.0.0</option><option value="2">/2 aka 192.0.0.0</option><option value="3">/3 aka 224.0.0.0</option><option value="4">/4 aka 240.0.0.0</option><option value="5">/5 aka 248.0.0.0</option><option value="6">/6 aka 252.0.0.0</option><option value="7">/7 aka 254.0.0.0</option><option value="8">/8 aka 255.0.0.0</option><option value="9">/9 aka 255.128.0.0</option><option value="10">/10 aka 255.192.0.0</option><option value="11">/11 aka 255.224.0.0</option><option value="12">/12 aka 255.240.0.0</option><option value="13">/13 aka 255.248.0.0</option><option value="14">/14 aka 255.252.0.0</option><option value="15">/15 aka 255.254.0.0</option><option value="16">/16 aka 255.255.0.0</option><option value="17">/17 aka 255.255.128.0</option><option value="18">/18 aka 255.255.192.0</option><option value="19">/19 aka 255.255.224.0</option><option value="20">/20 aka 255.255.240.0</option><option value="21">/21 aka 255.255.248.0</option><option value="22">/22 aka 255.255.252.0</option><option value="23">/23 aka 255.255.254.0</option><option value="24" selected="">/24 aka 255.255.255.0</option><option value="25">/25 aka 255.255.255.128</option><option value="26">/26 aka 255.255.255.192</option><option value="27">/27 aka 255.255.255.224</option><option value="28">/28 aka 255.255.255.240</option><option value="29">/29 aka 255.255.255.248</option><option value="30">/30 aka 255.255.255.252</option><option value="31">/31 aka 255.255.255.254</option><option value="32">/32 aka 255.255.255.255  </option></select>
+            </div>
+            <div class="subnets">
+                <div class="subnet">
+                    <div class="previous-subnet">subnet 1</div>
+                    <div class="actual-subnet">subnet 2</div>
+                    <div class="next-subnet">subnet 3</div>
+                </div>
+                <div class="hosts">
+                    <div class="namesubnets">number of hosts: </div><input type="text" id="numhosts">
+                </div>
+                <div class="calculate" onclick="getMask()">calculate</div>
+            </div>
+        </div>
+    </div>
+    <!-- support us -->
+    <!-- aprzesunicie po calculate w lewo panelu a results pjawiaja sie po prawo -->
+    <!-- <div class="add">ADD</div> -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,98 +1,205 @@
 /*PASCALL ✨*/
+/*Debiloodporne ✨*/
 let p2 = [128, 64, 32, 16, 8, 4, 2, 1]
 let ip = 192168010095
-let mask = 9
-let ip1 = (ip - ip %1000000000 )/ 1000000000// później po prostu nie zaokrąglaj bo dla 1 w 168 w dół a 5 w góre więc po prostu odejmuj reszte zroibone juz ale sprawdz reszte
-let ip2 = Math.round(ip /1000000 - ip1 * 1000)//moze tablice
-let ip3 = Math.round(ip /1000 - (ip1 * 1000 + ip2)* 1000)
-let ip4 = ip % 1000
-let maskDecimal = 0
+let ipbin = [[],[],[],[]]
+let mask = 0
+let maskNum = 24
+let maskbin = [[],[],[],[]]
 let ipsieci = 0
 let ipsiecibin = [[],[],[],[]]
-let ipbroadcast
-let ipbin = [[],[],[],[]]
-let maskbin = [[],[],[],[]]
-let ipbroadcastbin = 0
-let one = 0
+let ipbroadcast = 0
+let ipbroadcastbin = [[],[],[],[]]
+let ones = 0
+let first = 0
+let last = 0
+let numhosts = 2**(32 - maskNum) - 2
+let numsubnets = 2**(32 - maskNum)
 
-function IpToBin(ip1, ip2, ip3, ip4){
+for (let i = 0; i < 4; i++) {
+    for(let j = 0; j < 8; j++){
+        ones++
+        if (ones <= maskNum) {
+            maskbin[i][j] = 1
+        }else {
+            maskbin[i][j] = 0
+        }
+    }
+}
+
+function DecToBin(decimal, bin){
     for(let i = 0; i<4;i++){
         let toIp = 0
         for(let j = 0; j < p2.length; j++){
-            if(toIp + p2[j] <= (function(){switch (i){case 0: return ip1; case 1: return ip2; case 2: return ip3; case 3: return ip4;}})()){
+            if(toIp + p2[j] <= (function(){switch (i){case 0: return Show(decimal).oktet1; case 1: return Show(decimal).oktet2; case 2: return Show(decimal).oktet3; case 3: return Show(decimal).oktet4;}})()){
                 toIp += p2[j]
-                ipbin[i][j] = 1
-                console.log()
+                bin[i][j] = 1
             }else{
-                ipbin[i][j] = 0
+                bin[i][j] = 0
             }
-        }
-        
+        }   
     }
+    return bin
 }
 
-function MaskToBin(mask) {
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 8; j++){
-            one++
-            if (one <= mask){
-                maskbin[i][j] = 1
-            }else{
-                maskbin[i][j] = 0
-            }
-        }
-    }
-}
-
-function MaskToDecimal(maskbin) {
+function BinToDec(bin, decimal){
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 8; j++) {
-            if (maskbin[i][j] == 1) {
-                maskDecimal += p2[j]
+            if(bin[i][j]==1){
+                decimal+=p2[j]
             }
         }
-        maskDecimal *= 1000
+        decimal *= 1000
     }
-    maskDecimal /= 1000
+    decimal /= 1000
+    return decimal
 }
 
-function FirstIp(ipbin, maskbin) {
+function AND(ipbin, maskbin){
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 8; j++) {
             ipsiecibin[i][j] = ipbin[i][j] * maskbin[i][j]
         }
     }
-    console.log(ipsiecibin)
-    console.log(maskbin)
-    console.log(ipsiecibin)
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 8; j++) {
-            if (ipsiecibin[i][j] == 1) {
-                ipsieci += p2[j]
-            }
-        }
-        ipsieci *= 1000
-    }
-    ipsieci /= 1000
+    ipsieci = BinToDec(ipsiecibin, ipsieci)//podsieci uniwerslanie
+    first = ipsieci + 1
 }
 
-IpToBin(ip1, ip2, ip3, ip4)
-MaskToBin(mask)
-MaskToDecimal(maskbin)
-FirstIp(ipbin, maskbin)
+function ORNEGATIVE(ipbin, maskbin){
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 8; j++) {
+            if(maskbin[i][j] == 1){
+                maskbin[i][j] = 0
+            } else{
+                maskbin[i][j] = 1
+            }
+            if(ipbin[i][j] == 1 || maskbin[i][j] == 1){
+                ipbroadcastbin[i][j] = 1
+            } else {
+                ipbroadcastbin[i][j] = 0
+            }
+        }
+    }
+    ipbroadcast = BinToDec(ipbroadcastbin, ipbroadcast)
+    last = ipbroadcast - 1
+}
 
-let mask1 = (maskDecimal - maskDecimal %1000000000 )/ 1000000000
-let mask2 = maskDecimal /1000000 - mask1 * 1000
-let mask3 = maskDecimal /1000 - (mask1 * 1000 + mask2)* 1000
-let mask4 = maskDecimal % 1000
-let ipsieci1 = (ipsieci - ipsieci %1000000000 )/ 1000000000
-let ipsieci2 = ipsieci /1000000 - ipsieci1 * 1000
-let ipsieci3 = ipsieci /1000 - (ipsieci1 * 1000 + ipsieci2)* 1000
-let ipsieci4 = ipsieci % 1000
+function Show(dec) {
+    let oktet1 = (dec - dec %1000000000 )/ 1000000000
+    let oktet2 = Math.round(dec /1000000 - oktet1 * 1000)
+    let oktet3 = Math.round(dec /1000 - (oktet1 * 1000 + oktet2)* 1000)
+    let oktet4 = dec % 1000
+    return {address: `${oktet1}.${oktet2}.${oktet3}.${oktet4}`, oktet1: oktet1, oktet2: oktet2, oktet3: oktet3, oktet4: oktet4}
+}
 
-console.log(`Adres ip: ${ip1}.${ip2}.${ip3}.${ip4}`)
-console.log(`Maska: /${mask} = ${mask1}.${mask2}.${mask3}.${mask4}`)
-console.log(`Adres sieci: ${ipsieci1}.${ipsieci2}.${ipsieci3}.${ipsieci4}`)
-console.log(`Adres broadcast: ${ipbroadcast}`)
-//Funckja do: Bin -> Dec uniwersalnie
-//Funckja do: Dec-> Bin uniwersalnie hii
+ipbin = DecToBin(ip, ipbin)
+mask = BinToDec(maskbin, mask) //to nie jest dobre bo dla wielu podsieci nie będzie juz uniwersalnie albo coś z this bo nie mozemy do kadego przypisywać chyba ze dane kazdej podsieci zapiszemy jako obiekt a w funkcji będziemy dal odpowiedniego elementu z obiektu przypisywac
+AND(ipbin, maskbin)
+ORNEGATIVE(ipbin, maskbin)
+
+console.log(`Adres ip: ${Show(ip).address}`)
+console.log(`Maska: /${maskNum} - ${Show(mask).address}`)
+console.log(`Adres sieci: ${Show(ipsieci).address}`)
+console.log(`Adres broadcast: ${Show(ipbroadcast).address}`)
+console.log(`max liczba hostów w podsieci: ${numhosts}`)
+console.log(`max liczb. podsieci: ${numsubnets}`)
+console.log(`min host: ${Show(first).address}`)
+console.log(`min host: ${Show(last).address}`)
+
+let previous = document.querySelector(".previous-subnet")
+let actual = document.querySelector(".actual-subnet")
+let next = document.querySelector(".next-subnet")
+let actualsubnet = 0
+let subnets = []
+let liczbapodsieci = 5 //nie moze przekroczyć maksymalnej
+let podsieci = [[]] //na obiekty podsieci
+
+for (let j = 0; j < liczbapodsieci; j++) {
+    subnets[j] = `subnet ${j}`
+}
+//for less code smth with last name assign to next text
+function subnetSwitch(subnets) {
+    previous.addEventListener('click', () => {
+        actualsubnet -= 1
+        if(actual.textContent != "subnet 0"){
+        previous.textContent = `${subnets[actualsubnet - 1]}`
+        actual.textContent =  `${subnets[actualsubnet]}`
+        next.textContent = `${subnets[actualsubnet + 1]}`
+        }else{
+            previous.textContent = ""
+        }
+    });
+    next.addEventListener('click', () => {
+        actualsubnet += 1
+        previous.textContent = `${subnets[actualsubnet - 1]}`
+        actual.textContent =  `${subnets[actualsubnet]}`
+        next.textContent = `${subnets[actualsubnet + 1]}`
+    });
+}
+function getIp() {
+    ip = document.getElementById("ip").value;
+
+}
+subnetSwitch(subnets)
+// function PODSIECI(numsubnets, numhosts) {
+//     numsubnets++
+//     podsieci[i] = podsiec = {
+//         name: `podsiec${i}`,
+//         ipsieci: ipsieci,
+//         ipbroadcast: ORNEGATIVE(podsieci[i - 1].ipsieci, ),
+//         hosts: numhosts
+//     }  
+// }
+
+// PODSIECI(liczbapodsieci, numhosts)
+
+// do {
+
+// }while(enter || pdsieci => możliwe posieci)
+// let userInput = prompt("Wpisz coś:");
+// console.log(userInput);
+// newmaska = maska + n
+// newmaxlhost = 2^liczbapodsieci - 2
+let title = document.querySelector(".title")
+let star = document.querySelector(".star")
+let calctext = document.querySelector(".calc-text")
+let controlpanel = document.querySelector(".control-panel")
+let est = document.querySelector(".est")
+
+function intro(params) {
+    
+}
+function scrollControl(){
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            est.style.color = "white"
+        }else{
+            est.style.color = "black"
+        }
+        if(window.scrollY > window.innerHeight * 90/100){
+            title.style.color = "white"
+            star.style.color = "white"
+        }else{
+            title.style.color = "black"
+            star.style.color = "black"
+        }
+        if(window.scrollY > window.innerHeight * 70/100){
+            calctext.style.transition = ".5s"
+            calctext.style.opacity = "0"
+            controlpanel.style.top = "-20vh"
+            controlpanel.style.transform = "rotate(0deg)"
+            controlpanel.style.filter = "blur(.5px)"
+        }else{
+            calctext.style.opacity = "1"
+            controlpanel.style.top = "10vh"
+            controlpanel.style.transform = "rotate(5deg)"
+            controlpanel.style.filter = "blur(5px)"
+        }
+    });
+}
+scrollControl()
+
+//hover on creators by js mouseover not hover make smooth and some light green or blue aqua and black border with maybe some gpt arrow
+//monler shop online scroll x right left - > big texts ny montreal vienna and vid in bacground of text bcg si black smootjh
+//losowy generator państw that one which ll be choosn thats the one select
+//gra my character u can buy items itd próbowac bawic sie z prawem crypto itd praktycznie wszystko i taka gra online uzytkownicy 

@@ -198,8 +198,3 @@ function scrollControl(){
     });
 }
 scrollControl()
-
-//hover on creators by js mouseover not hover make smooth and some light green or blue aqua and black border with maybe some gpt arrow
-//monler shop online scroll x right left - > big texts ny montreal vienna and vid in bacground of text bcg si black smootjh
-//losowy generator państw that one which ll be choosn thats the one select
-//gra my character u can buy items itd próbowac bawic sie z prawem crypto itd praktycznie wszystko i taka gra online uzytkownicy 

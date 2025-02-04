@@ -1,5 +1,7 @@
 /*PASCALL ✨*/
 /*Debiloodporne ✨*/
+let creators_hover = document.querySelector(".creators_hover")
+let creators = document.querySelector(".creators")
 let p2 = [128, 64, 32, 16, 8, 4, 2, 1]
 let ip = 192168010095
 let ipbin = [[],[],[],[]]
@@ -15,6 +17,14 @@ let first = 0
 let last = 0
 let numhosts = 2**(32 - maskNum) - 2
 let numsubnets = 2**(32 - maskNum)
+
+creators_hover.addEventListener("mouseenter", () => {
+    creators.classList.add("hovered");
+  });
+
+creators_hover.addEventListener("mouseleave", () => {
+    creators.classList.remove("hovered");
+});
 
 for (let i = 0; i < 4; i++) {
     for(let j = 0; j < 8; j++){
@@ -111,35 +121,68 @@ let actual = document.querySelector(".actual-subnet")
 let next = document.querySelector(".next-subnet")
 let actualsubnet = 1
 let subnets = []
-let liczbapodsieci = 5 //nie moze przekroczyć maksymalnej
+let liczbapodsieci = 10 //nie moze przekroczyć maksymalnej
 let podsieci = [[]] //na obiekty podsieci
 
-for (let j = 0; j < liczbapodsieci; j++) {
+for (let j = 1; j <= liczbapodsieci; j++) {
     subnets[j] = `subnet ${j}`
 }
 //for less code smth with last name assign to next text
+// let k = 0;
+// function subnetSwitch(subnets) {
+//     previous.addEventListener('click', () => {
+//         actualsubnet -= 1
+//         if(actual.textContent != "subnet 0"){
+//         previous.textContent = `${subnets[actualsubnet - 1]}`
+//         actual.textContent =  `${subnets[actualsubnet]}`
+//         next.textContent = `${subnets[actualsubnet + 1]}`
+//         }else{
+//             previous.textContent = ""
+//         }
+//     });
+//     next.addEventListener('click', () => {
+//         actualsubnet += 1
+//         previous.textContent = `${subnets[actualsubnet - 1]}`
+//         actual.textContent =  `${subnets[actualsubnet]}`
+//         next.textContent = `${subnets[actualsubnet + 1]}`
+//     });
+//     if(actual.textContent == "undefined"){
+//         actual.style.visiblity = "hidden";
+//     }
+// }
+// function getIp() {
+//     ip = document.getElementById("ip").value;
+
+// }
+
 function subnetSwitch(subnets) {
+    previous.textContent = ""
+    actual.textContent = subnets[1]
+    next.textContent = subnets[2]
     previous.addEventListener('click', () => {
-        actualsubnet -= 1
-        if(actual.textContent != "subnet 0"){
-        previous.textContent = `${subnets[actualsubnet - 1]}`
-        actual.textContent =  `${subnets[actualsubnet]}`
-        next.textContent = `${subnets[actualsubnet + 1]}`
-        }else{
-            previous.textContent = ""
+        if (actualsubnet != 1) {
+            actualsubnet -=1
+            previous.textContent = `${subnets[actualsubnet - 1]}`
+            actual.textContent = `${subnets[actualsubnet]}`
+            next.textContent = `${subnets[actualsubnet + 1]}`
+            if (actualsubnet == 1) {
+                previous.textContent = ""
+            }
         }
     });
     next.addEventListener('click', () => {
-        actualsubnet += 1
-        previous.textContent = `${subnets[actualsubnet - 1]}`
-        actual.textContent =  `${subnets[actualsubnet]}`
-        next.textContent = `${subnets[actualsubnet + 1]}`
+        if (actualsubnet - 1 != liczbapodsieci && actualsubnet != liczbapodsieci) {
+            actualsubnet +=1
+            previous.textContent = `${subnets[actualsubnet - 1]}`
+            actual.textContent = `${subnets[actualsubnet]}`
+            next.textContent = `${subnets[actualsubnet + 1]}`
+            if (actualsubnet == liczbapodsieci) {
+                next.textContent = ""
+            }
+        }
     });
 }
-function getIp() {
-    ip = document.getElementById("ip").value;
 
-}
 subnetSwitch(subnets)
 // function PODSIECI(numsubnets, numhosts) {
 //     numsubnets++
@@ -204,3 +247,4 @@ scrollControl()
 //losowy generator państw that one which ll be choosn thats the one select
 //gra my character u can buy items itd próbowac bawic sie z prawem crypto itd praktycznie wszystko i taka gra online uzytkownicy 
 //control panel dashed border
+//zeszyt i  plan podsieci

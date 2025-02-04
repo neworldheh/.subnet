@@ -24,6 +24,13 @@
     width: 10vw;
     height: 30vh;
 }
+.creators_hover{
+    height: 75px;
+    width: 115px;
+    z-index: 100;
+    position: fixed;
+    right: 0;
+}
 /* .line{
     animation: line 3s;
     top: 15vh;
@@ -298,21 +305,21 @@
     transition: .5s;
     background-color: #000;
 }
-.creators:hover{
+.creators.hovered{
     right: 6vw;
     transition: .5s;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     overflow: visible;
 }
-.creators:hover::before{
+.creators.hovered::before{
     transform: translateX(100px);
     transition: 1s;
     z-index: -1;
     border-radius: 0;
     width: 100px;
 }
-.creators:hover .cnames{
+.creators.hovered .cnames{
     z-index: 1;
     right: 1vw;
     transition: .5s;
@@ -407,9 +414,11 @@
 input{
     float: left;
     width: 65%;
-}
-input:nth-child(1){
     color: #000;
+    opacity: .8;
+}
+input:nth-child(2){
+    margin-left: 1vw;
 }
 select{
     float: left;

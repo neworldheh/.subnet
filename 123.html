@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Visualization</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .network-map {
+            position: relative;
+            width: 80vw;
+            height: 60vh;
+            background: linear-gradient(135deg, #e3e3e3, #f7f7f7);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .subnet-box {
+            position: absolute;
+            width: 150px;
+            height: 100px;
+            background-color: rgba(100, 149, 237, 0.8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.5s, background-color 0.3s;
+        }
+        .subnet-box:hover {
+            background-color: rgba(70, 130, 180, 0.9);
+            transform: scale(1.1);
+        }
+        .packet {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            animation: movePacket 5s infinite;
+        }
+        @keyframes movePacket {
+            0% { top: 10%; left: 10%; }
+            25% { top: 10%; left: 80%; }
+            50% { top: 80%; left: 80%; }
+            75% { top: 80%; left: 10%; }
+            100% { top: 10%; left: 10%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="network-map">
+        <div class="subnet-box" style="top: 10%; left: 10%;">Subnet 1</div>
+        <div class="subnet-box" style="top: 10%; left: 70%;">Subnet 2</div>
+        <div class="subnet-box" style="top: 70%; left: 10%;">Subnet 3</div>
+        <div class="subnet-box" style="top: 70%; left: 70%;">Subnet 4</div>
+        <div class="packet"></div>
+    </div>
+    <script>
+        // Example of simulating packet movement
+        const packet = document.querySelector('.packet');
+        let position = 0;
+        function simulatePacket() {
+            position = (position + 1) % 100;
+            packet.style.top = `${10 + Math.sin(position / 10) * 30}%`;
+            packet.style.left = `${10 + Math.cos(position / 10) * 30}%`;
+            requestAnimationFrame(simulatePacket);
+        }
+        simulatePacket();
+    </script>
+</body>
+</html>

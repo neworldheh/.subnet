@@ -1,0 +1,116 @@
+/* dragging */
+*{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+body{
+    /* background-image: url("street-789626_1920.jpg");
+    background-size: cover; */
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: bold;
+    cursor: none;
+}
+.cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.06);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    pointer-events: none;
+}
+.background {
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    /* animation: gradientShift 10s ease-in-out infinite;
+    background-size: 300% 300%;
+    background-image: linear-gradient(123deg, rgba(200, 84, 28, 0.8) 15%, rgba(181, 76, 147, 0.8) 35%, rgba(98, 67, 151, 0.8) 50%, rgba(70, 26, 140, 0.8) 65%, rgba(65, 148, 45, 0.8) 85%); */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+/* animation: blurred .2s infinite; */
+/* @keyframes blurred {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: .95;
+    }
+    100%{
+        opacity: 1;
+    }
+} */
+.top1{
+    width: 100vw;
+    height: 3vh;
+}
+.top2 {
+    top: 5vh;
+    position: fixed;
+    width: 100vw;
+    height: 3vh;
+    /* background-color: #000000; */
+    background-color: #f2f600;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transition: .5s;
+}
+.home, .news, .jobs, .lets {
+    color: black;
+    padding: 0 20px;
+    transition: .5s;
+}
+.home:hover, .news:hover, .jobs:hover, .lets:hover {
+    /* background-color: #ffffffe7; */
+    background-color: #080808;
+    color: white;
+    transition: .5s;
+}
+.content{
+    position: fixed;
+    top: 10vh;
+    width: 100vw;
+    height: 90vh;
+}
+.how{
+    position: relative;
+    left: 1vw;
+    width: 70vw;
+    height: 15vh;
+    background-color: #02020273;
+    font-size: 70px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    transition: .5s;
+}
+.how:hover{
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    background-color: rgb(48, 85, 255);
+    color: #000;
+    transition: .5s;
+}

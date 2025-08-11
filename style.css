@@ -20,6 +20,38 @@
     width: 100vw;
     background-color: #f7f7f7;
 }
+.toppy{
+    z-index: 100;
+    width: 35vw;
+    height: 5vh;
+    border: 1px solid black;
+    border-radius: 25px;
+    position: fixed;
+    top: 7vh;
+    left: calc(50vw - 17.5vw);
+    background-color: rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.dot{
+    z-index: -1;
+    height: 4vh;
+    width: 5vw;
+    display: none;
+}
+.toppy:hover .dot{
+    background-color: #000;
+    display: initial;
+}
+.toppy a{
+    transition: .75s;
+}
+.toppy a:hover{
+    color: #ceff65;
+    transition: .75s;
+}
 .figure{
     width: 10vw;
     height: 30vh;

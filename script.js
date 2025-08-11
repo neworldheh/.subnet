@@ -17,6 +17,9 @@ let first = 0
 let last = 0
 let numhosts = 2**(32 - maskNum) - 2
 let numsubnets = 2**(32 - maskNum)
+const maskSelect = document.querySelector("select[name='m']");
+let calculate = document.querySelector(".calculate")
+let ipinput = document.getElementById("ip")
 
 creators_hover.addEventListener("mouseenter", () => {
     creators.classList.add("hovered");
@@ -26,22 +29,27 @@ creators_hover.addEventListener("mouseleave", () => {
     creators.classList.remove("hovered");
 });
 
-for (let i = 0; i < 4; i++) {
-    for(let j = 0; j < 8; j++){
-        ones++
-        if (ones <= maskNum) {
-            maskbin[i][j] = 1
-        }else {
-            maskbin[i][j] = 0
+function maskCreate(maskNum){
+    for (let i = 0; i < 4; i++) {
+        for(let j = 0; j < 8; j++){
+            ones++
+            if (ones <= maskNum) {
+                maskbin[i][j] = 1
+            }else {
+                maskbin[i][j] = 0
+            }
         }
     }
+    ones = 0
+    console.log(maskbin)
 }
+
 
 function DecToBin(decimal, bin){
     for(let i = 0; i<4;i++){
         let toIp = 0
         for(let j = 0; j < p2.length; j++){
-            if(toIp + p2[j] <= (function(){switch (i){case 0: return Show(decimal).oktet1; case 1: return Show(decimal).oktet2; case 2: return Show(decimal).oktet3; case 3: return Show(decimal).oktet4;}})()){
+            if(toIp + p2[j] <= (function(){switch (i){case 0: return Show(decimal).oktet1; case 1: return Show(decimal).oktet2; case 2: return Show(decimal).oktet3; case 3: return Show(decimal).oktet4;}})()){ 
                 toIp += p2[j]
                 bin[i][j] = 1
             }else{
@@ -51,6 +59,8 @@ function DecToBin(decimal, bin){
     }
     return bin
 }
+
+
 
 function BinToDec(bin, decimal){
     for (let i = 0; i < 4; i++) {
@@ -101,20 +111,26 @@ function Show(dec) {
     let oktet4 = dec % 1000
     return {address: `${oktet1}.${oktet2}.${oktet3}.${oktet4}`, oktet1: oktet1, oktet2: oktet2, oktet3: oktet3, oktet4: oktet4}
 }
-
-ipbin = DecToBin(ip, ipbin)
-mask = BinToDec(maskbin, mask) //to nie jest dobre bo dla wielu podsieci nie będzie juz uniwersalnie albo coś z this bo nie mozemy do kadego przypisywać chyba ze dane kazdej podsieci zapiszemy jako obiekt a w funkcji będziemy dal odpowiedniego elementu z obiektu przypisywac
-AND(ipbin, maskbin)
-ORNEGATIVE(ipbin, maskbin)
-
-console.log(`Adres ip: ${Show(ip).address}`)
-console.log(`Maska: /${maskNum} - ${Show(mask).address}`)
-console.log(`Adres sieci: ${Show(ipsieci).address}`)
-console.log(`Adres broadcast: ${Show(ipbroadcast).address}`)
-console.log(`max liczba hostów w podsieci: ${numhosts}`)
-console.log(`max liczb. podsieci: ${numsubnets}`)
-console.log(`min host: ${Show(first).address}`)
-console.log(`min host: ${Show(last).address}`)
+function Play(){
+    
+    ipbin = DecToBin(ip, ipbin)
+    console.log(maskNum)
+    maskCreate(maskNum)
+    console.log(maskbin)
+    console.log(Show(maskbin))
+    mask = BinToDec(maskbin, mask) //to nie jest dobre bo dla wielu podsieci nie będzie juz uniwersalnie albo coś z this bo nie mozemy do kadego przypisywać chyba ze dane kazdej podsieci zapiszemy jako obiekt a w funkcji będziemy dal odpowiedniego elementu z obiektu przypisywac
+    AND(ipbin, maskbin)
+    ORNEGATIVE(ipbin, maskbin)
+    console.log(`Adres ip: ${Show(ip).address}`)
+    console.log(`Maska: /${maskNum} - ${Show(mask).address}`)
+    console.log(`Adres sieci: ${Show(ipsieci).address}`)
+    console.log(`Adres broadcast: ${Show(ipbroadcast).address}`)
+    console.log(`max liczba hostów w podsieci: ${numhosts}`)
+    console.log(`max liczb. podsieci: ${numsubnets}`)
+    console.log(`min host: ${Show(first).address}`)
+    console.log(`min host: ${Show(last).address}`)
+    maskCreate(0)
+}
 
 let previous = document.querySelector(".previous-subnet")
 let actual = document.querySelector(".actual-subnet")
@@ -150,11 +166,35 @@ for (let j = 1; j <= liczbapodsieci; j++) {
 //         actual.style.visiblity = "hidden";
 //     }
 // }
-// function getIp() {
-//     ip = document.getElementById("ip").value;
 
-// }
+function getMask(){
+    getIp()
+    Play()
+}
 
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        getIp()
+        dotted()
+        ipinput.value = ""
+        Play()
+    }
+});
+
+function getIp() {
+    ip = ipinput.value
+    console.log(ip)
+}
+
+function dotted(){
+    console.log(ipinput.value) 
+}
+
+maskSelect.addEventListener("change", function () {
+    let selectedMask = maskSelect.value;
+    maskNum = parseInt(selectedMask);
+    console.log(maskNum)
+});
 function subnetSwitch(subnets) {
     previous.textContent = ""
     actual.textContent = subnets[1]
@@ -229,7 +269,7 @@ function scrollControl(){
         if(window.scrollY > window.innerHeight * 70/100){
             calctext.style.transition = ".5s"
             calctext.style.opacity = "0"
-            controlpanel.style.top = "-20vh"
+            controlpanel.style.top = "-30vh"
             controlpanel.style.transform = "rotate(0deg)"
             controlpanel.style.filter = "blur(.5px)"
         }else{
